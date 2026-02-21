@@ -6,6 +6,7 @@ import {
 } from './src/utils';
 import {
     TOKEN,
+    GROUP_IDS,
 } from './src/constants';
 
 console.info(`[🧑‍🚀] Starting JoJoto`);
@@ -34,7 +35,21 @@ console.info(`[🚀 started] ${botUser.username} (${botUser.id})`);
 await ensureDefaultRights(bot);
 
 bot.on('message', (msg) => {
-    if (Math.random() < 0.9) {
-        bot.sendMessage(msg.chat.id, 'MISSÄ ON JJ!?')
+
+    // Check if message in DMs or in allowed chats, otherwise return
+    if (msg.chat.id !== msg.from?.id && !GROUP_IDS?.includes(msg.chat.id.toString())) {
+        return
+    };
+
+
+    const text = msg.text?.toString();
+    if (text) {
+        console.info(`[log] Received message: "${text}"`);
+    }
+
+    if (text?.toString().toLowerCase().includes('jj')) {
+        bot.sendMessage(msg.chat.id, 'MISSÄ ON JJ!?');
+        console.info(msg.chat.id);
+        console.info(msg.from?.id);
     }
 })

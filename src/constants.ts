@@ -1,6 +1,7 @@
 import type TelegramBot from "node-telegram-bot-api";
 
 export const TOKEN = Bun.env.TELEGRAM_BOT_TOKEN;
+export const GROUP_IDS = Bun.env.ACCEPTED_GROUP_IDS?.split(',');
 
 export const WANTED_RIGHTS: TelegramBot.ChatAdministratorRights = {
     is_anonymous: false,
