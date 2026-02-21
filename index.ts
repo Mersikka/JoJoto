@@ -38,6 +38,7 @@ bot.on('message', (msg) => {
 
     // Check if message in DMs or in allowed chats, otherwise return
     if (msg.chat.id !== msg.from?.id && !GROUP_IDS?.includes(msg.chat.id.toString())) {
+        console.info(`[log] Rejected message from group "${msg.chat.title}", id "${msg.chat.id}"`)
         return
     };
 
@@ -49,7 +50,5 @@ bot.on('message', (msg) => {
 
     if (text?.toString().toLowerCase().includes('jj')) {
         bot.sendMessage(msg.chat.id, 'MISSÄ ON JJ!?');
-        console.info(msg.chat.id);
-        console.info(msg.from?.id);
     }
 })
